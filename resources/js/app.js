@@ -7,6 +7,5 @@ const textremaning = document.getElementById("remaning");
 textarea.addEventListener("input", function (e) {
     this.style.height = "auto";
     this.style.height = this.scrollHeight - 90 + "px";
-    textremaning.innerHTML = this.length - this.maxLength
+    textremaning.innerHTML = this.maxLength - this.value.length;
 });
-
