@@ -34,7 +34,6 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav me-auto">
-                        <li><a class="nav-link" href="{{ route('tweets.index') }}">Tweet</a></li>
                     </ul>
 
                     <!-- Right Side Of Navbar -->
