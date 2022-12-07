@@ -18,7 +18,8 @@ class Tweet extends Model
     }
 
     public function getCreatedAtAttribute($date)
-    {
+    {   
+        if(Carbon::parse($date)->format('Y-m-d') == Date("Y-m-d", time())) return Carbon::parse($date)->format('H:i');
         return Carbon::parse($date)->format('d M. Y');
     }
 }

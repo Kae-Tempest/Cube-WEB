@@ -1,8 +1,11 @@
 @extends('layouts.app')
 
 @section('content')
-    @include('tweet.tweetCreate')
+    <h1 class="display-1 title">{{$user->name}}</h1>
+    <span class="date"><small>{{$user->created_at}}</small></span>
+    <hr style="heigth = 3px">
     @foreach($tweets as $tweet)
+    @if($tweet->user->name == $user->name)
         <div class="col-4" style="margin: auto">
             <div class="card mb-4 shadow-sm">
                 <div class="card-body">
@@ -28,5 +31,8 @@
                 <span class="card-text" style="text-align: end; padding-right: 5px"><small class="text-muted">{{ $tweet->created_at }}</small></span>
             </div>
         </div>
+        @endif
     @endforeach
+
+
 @endsection

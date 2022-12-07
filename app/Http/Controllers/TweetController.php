@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Tweet;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 
 class TweetController extends Controller
@@ -18,7 +19,7 @@ class TweetController extends Controller
         $this->middleware('auth');
     }
     public function index() {
-        $tweets = Tweet::with('user')->get();
+        $tweets = Tweet::with('user')->orderBy('created_at','DESC')->get();
 
         return view('tweet/tweets', [
             'tweets' => $tweets
@@ -27,14 +28,18 @@ class TweetController extends Controller
 
     public function store(Request $request){
         $request->validate([
-            'content' => ['required','min:1', 'max:250'],
+            'TweetContent' => ['required','min:1', 'max:250'],
             'user_id' => ['exists:users,id']
         ]);
         Tweet::create([
-            'content' => $request->input('content'),
+            'content' => $request->TweetContent,
             'user_id' => auth()->user()->id
         ]);
+        return Redirect::route('tweets.index');
+    }
 
+    public function destroy(Tweet $tweet){
+        $tweet->delete();
         return Redirect::route('tweets.index');
     }
 }
