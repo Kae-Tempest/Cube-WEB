@@ -40,6 +40,6 @@ class TweetController extends Controller
 
     public function destroy(Tweet $tweet){
         $tweet->delete();
-        return Redirect::route('tweets.index');
+        return redirect()->back();
     }
 }
