@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Tweet;
+use App\Models\TweetComment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
@@ -20,9 +21,9 @@ class TweetController extends Controller
     }
     public function index() {
         $tweets = Tweet::with('user')->orderBy('created_at','DESC')->get();
-
+        
         return view('tweet/tweets', [
-            'tweets' => $tweets
+            'tweets' => $tweets,
         ]);
     }
 

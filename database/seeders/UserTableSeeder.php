@@ -15,8 +15,9 @@ class UserTableSeeder extends Seeder
     public function run()
     {
         \App\Models\User::factory(10)->create()->each(
-            fn ($user) => $user->tweets()->saveMany(\App\Models\Tweet::factory(5)->make()) 
+            fn ($user) => $user->tweets()->saveMany(\App\Models\Tweet::factory(5)->make()->each(
+                fn ($tweet) => $tweet->comments()->saveMany(\App\Models\Comment::factory(5)->make())
+            )),
         );
-
     }
 }

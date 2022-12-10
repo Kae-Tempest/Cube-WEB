@@ -23,3 +23,4 @@ Route::get('/', [\App\Http\Controllers\TweetController::class, 'index'])->name('
 Route::post('/tweets', [\App\Http\Controllers\TweetController::class, 'store'])->name('tweets.store');
 Route::delete('/tweets/{tweet}', [\App\Http\Controllers\TweetController::class, 'destroy'])->name('tweets.destroy');
 Route::get('/user/{user}', [\App\Http\Controllers\ProfileController::class, 'index'])->name('user.profile');
+Route::get('/{tweet}/comments', [\App\Http\Controllers\CommentController::class, 'index'])->name('tweet.comments');
