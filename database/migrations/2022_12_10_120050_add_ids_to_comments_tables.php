@@ -13,7 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('comments_tables', function (Blueprint $table) {
+        Schema::table('comments', function (Blueprint $table) {
             $table->unsignedBigInteger('user_id')->nullable()->after('content');
             $table->foreign('user_id')->references('id')->on('users');
             $table->unsignedBigInteger('tweet_id')->nullable()->after('content');

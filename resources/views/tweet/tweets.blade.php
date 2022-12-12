@@ -25,8 +25,13 @@
                 <div class="container">
                     {{$tweet->content}}
                 </div>
-                <span class="card-text" style="text-align: end; padding-right: 5px"><small class="text-muted">{{ $tweet->created_at }}</small></span>
+                <hr class="separator">
+                <div class="d-flex justify-content-between">
+                    <a href="#RouteModal" class="btn btn-primary" style="margin: 5px 0 5px 5px"><i class="bi bi-chat-dots"></i></a>
+                    <span class="card-text" style="text-align: end; padding-right: 5px"><small class="text-muted">{{ $tweet->created_at }}</small></span>
+                </div>
             </div>
         </div>
+        @include('tweet.createComment')
     @endforeach
 @endsection
