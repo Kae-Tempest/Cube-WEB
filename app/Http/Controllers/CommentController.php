@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Comment;
+use Illuminate\Support\Facades\Redirect;
+use App\Models\Tweet;
 
 
 class CommentController extends Controller
@@ -14,8 +16,10 @@ class CommentController extends Controller
     }
     
     public function index() {
+        $tweets = Tweet::all();
         $comments = Comment::with('user')->orderBy('created_at','DESC')->get();
-        return view('tweet/comment', [
+        return view('tweet/tweets', [
+            'tweets' => $tweets,
             'comments' => $comments,
         ]);
     }
@@ -23,14 +27,15 @@ class CommentController extends Controller
         $request->validate([
             'CommentContent' => ['required','min:1','max:250'],
             'user_id' => ['exists:users,id'],
-            'tweet_id' => ['exists:tweet,id']
+            'post_id' => ['exists:post,id']
         ]);
         Comment::create([
             'content' => $request->CommentContent,
             'user_id' => auth()->user()->id,
-            'tweet_id' => $request->tweet_id
+            'post_id' => $request->id
         ]);
-        return Redirect::route('tweets.index');
+        return Redirect::route('tweet.comments');
+
     }
 
     public function destroy(Comment $comment) {

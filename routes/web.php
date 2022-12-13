@@ -13,14 +13,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('tweet.tweets');
-});
-
 Auth::routes();
 
 Route::get('/', [\App\Http\Controllers\TweetController::class, 'index'])->name('tweets.index');
 Route::post('/tweets', [\App\Http\Controllers\TweetController::class, 'store'])->name('tweets.store');
 Route::delete('/tweets/{tweet}', [\App\Http\Controllers\TweetController::class, 'destroy'])->name('tweets.destroy');
+Route::delete('/comments/{comment}', [\App\Http\Controllers\CommentController::class, 'destroy'])->name('comments.destroy');
 Route::get('/user/{user}', [\App\Http\Controllers\ProfileController::class, 'index'])->name('user.profile');
-Route::get('/{tweet}/comments', [\App\Http\Controllers\CommentController::class, 'index'])->name('tweet.comments');
+Route::get('/', [\App\Http\Controllers\CommentController::class, 'index'])->name('tweet.comments');
+Route::post('/comments', [\App\Http\Controllers\CommentController::class, 'store'])->name('comment.store');
