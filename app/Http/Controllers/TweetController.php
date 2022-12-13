@@ -19,27 +19,30 @@ class TweetController extends Controller
     {
         $this->middleware('auth');
     }
-    public function index() {
-        $tweets = Tweet::with('user')->orderBy('created_at','DESC')->get();
-        
+    public function index()
+    {
+        $tweets = Tweet::with('user')->orderBy('created_at', 'DESC')->get();
+
         return view('tweet/tweets', [
             'tweets' => $tweets,
         ]);
     }
 
-    public function store(Request $request){
+    public function store(Request $request)
+    {
         $request->validate([
-            'TweetContent' => ['required','min:1', 'max:250'],
+            'TweetContent' => ['required', 'min:1', 'max:250'],
             'user_id' => ['exists:users,id']
         ]);
         Tweet::create([
             'content' => $request->TweetContent,
             'user_id' => auth()->user()->id
         ]);
-        return Redirect::route('tweets.index');
+        return Redirect::route('tweet.comments');
     }
 
-    public function destroy(Tweet $tweet){
+    public function destroy(Tweet $tweet)
+    {
         $tweet->delete();
         return redirect()->back();
     }

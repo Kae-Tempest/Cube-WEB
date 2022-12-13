@@ -14,31 +14,34 @@ class CommentController extends Controller
     {
         $this->middleware('auth');
     }
-    
-    public function index() {
-        $tweets = Tweet::all();
-        $comments = Comment::with('user')->orderBy('created_at','DESC')->get();
+
+    public function index()
+    {
+        $tweets = Tweet::orderBy('created_at', 'DESC')->get();
+        $comments = Comment::with('user')->orderBy('created_at', 'DESC')->get();
         return view('tweet/tweets', [
             'tweets' => $tweets,
             'comments' => $comments,
         ]);
     }
-    public function store(Request $request) {
+    public function store(Request $request)
+    {
         $request->validate([
-            'CommentContent' => ['required','min:1','max:250'],
+            'CommentContent' => ['required', 'min:1', 'max:250'],
             'user_id' => ['exists:users,id'],
-            'post_id' => ['exists:post,id']
+            'tweet_id' => ['exists:tweet,id']
         ]);
         Comment::create([
             'content' => $request->CommentContent,
             'user_id' => auth()->user()->id,
-            'post_id' => $request->id
+            'tweet_id' => $request->tweet_id
         ]);
         return Redirect::route('tweet.comments');
 
     }
 
-    public function destroy(Comment $comment) {
+    public function destroy(Comment $comment)
+    {
         $comment->delete();
         return redirect()->back();
     }

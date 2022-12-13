@@ -18,7 +18,7 @@ class CommentFactory extends Factory
     {
         return [
             'content' => $this->faker->text,
-            'post_id' => $this->faker->numberBetween(1,50),
+            'tweet_id' => $this->faker->numberBetween(1,50),
             'user_id' => $this->faker->numberBetween(1,10),
         ];
     }
