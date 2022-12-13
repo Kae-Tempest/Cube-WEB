@@ -11,18 +11,20 @@ use Illuminate\Database\Eloquent\Model;
 class Tweet extends Model
 {
     use HasFactory;
-    protected $fillable = ['content','user_id'];
+    protected $fillable = ['content', 'user_id'];
 
     public function user()
     {
         return $this->belongsTo(User::class);
     }
-    public function comments() {
+    public function comments()
+    {
         return $this->hasMany(Comment::class)->orderBy('created_at', 'DESC');
     }
     public function getCreatedAtAttribute($date)
-    {   
-        if(Carbon::parse($date)->format('Y-m-d') == Date("Y-m-d", time())) return Carbon::parse($date)->format('H:i');
+    {
+        if (Carbon::parse($date)->format('Y-m-d') == Date("Y-m-d", time()))
+            return Carbon::parse($date)->timezone('Europe/Paris')->format('H:i');
         return Carbon::parse($date)->format('d M. Y');
     }
 }
