@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Comment;
 use Illuminate\Http\Request;
 use \App\Models\User;
 use App\Models\Tweet;
@@ -16,6 +17,7 @@ class ProfileController extends Controller
      */
     public function index(User $user) {
         $tweets = Tweet::with('user')->orderBy('created_at','DESC')->get();
-        return view('user.profile', compact('user'),['tweets' => $tweets]);
+        $comments = Comment::with('user')->orderBy('created_at', 'DESC')->get();
+        return view('user.profile', compact('user'),['tweets' => $tweets, 'comments' => $comments]);
     }
 }

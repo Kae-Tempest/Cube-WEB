@@ -27,7 +27,7 @@ class CommentController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'CommentContent' => ['required','min:1','max:250'],
+            'CommentContent' => ['required', 'min:1', 'max:250'],
             'user_id' => ['exists:users,id'],
             'tweet_id' => ['exists:tweets,id']
         ]);
@@ -36,7 +36,7 @@ class CommentController extends Controller
             'user_id' => auth()->user()->id,
             'tweet_id' => $request->tweet_id
         ]);
-        return Redirect::route('tweet.comments');
+        return redirect()->back();
 
     }
 

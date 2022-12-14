@@ -8,7 +8,7 @@
         <div class="row">
             <div class="col">
                 <h5 class="card-tilte"><a href="{{ route('user.profile', ['user' => $tweet->user ]) }}"
-                        style="text-decoration: none; color: black">{{$tweet->user->name}} {{$tweet->id}}</a></h5>
+                        style="text-decoration: none; color: black">{{$tweet->user->name}}</a></h5>
             </div>
             @if($tweet->user->name === Auth::user()->name)
             <div class="col-1">
@@ -70,11 +70,10 @@
         <div class="row">
             <div class="col">
                 <h5 class="card-tilte"><a href="{{ route('user.profile', ['user' => $comment->user ]) }}"
-                        style="text-decoration: none; color: black">{{$comment->user->name}}
-                        {{$comment->tweet_id}}</a></h5>
+                        style="text-decoration: none; color: black">{{$comment->user->name}}</a></h5>
             </div>
             @if($comment->user->name === Auth::user()->name)
-            <div class="col-1">
+            <div class="col-1 m-2">
                 <form action="{{ route('comments.destroy', ['comment' => $comment]) }}" method="POST">
                     @csrf
                     @method('DELETE')
@@ -88,8 +87,8 @@
             {{$comment->content}}
         </div>
     </div>
-    <div class="card-footer">
-        <span class="card-text" style="text-align: right; padding-right: 5px"><small
+    <div class="card-footer text-rigth">
+        <span class="card-text" style="padding-right: 5px"><small
                 class="text-muted">{{$comment->created_at}}</small></span>
     </div>
 </div>

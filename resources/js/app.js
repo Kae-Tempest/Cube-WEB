@@ -27,7 +27,7 @@ const myInput = document.getElementById("openModal");
 myModal.addEventListener("shown.bs.modal", (e) => {
     let tweet_id = e.relatedTarget.getAttribute("data-tweet_id");
     let CommentForm = document.getElementById("paper2");
-    //CommentForm.action = `http://127.0.0.1:8000/comments?tweet_id=${tweet_id}`
+    CommentForm.action = `http://127.0.0.1:8000/comments?tweet_id=${tweet_id}`;
     console.log(CommentForm.action);
     myInput.focus();
 });
